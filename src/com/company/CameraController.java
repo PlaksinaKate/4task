@@ -11,6 +11,7 @@ import java.awt.event.MouseMotionListener;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.Set;
 import javax.swing.SwingUtilities;
 
@@ -20,6 +21,7 @@ import com.company.math.Vector4;
 import com.company.screen.ScreenConverter;
 import com.company.screen.ScreenPoint;
 import com.company.third.Camera;
+import com.company.third.PolyLine3D;
 
 /**
  * @author Alexey

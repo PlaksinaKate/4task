@@ -12,8 +12,12 @@ import java.util.LinkedList;
 import java.util.List;
 
 import com.company.draw.IDrawer;
+import com.company.draw.Shadow;
+import com.company.draw.SimpleEdgeDrawer;
 import com.company.math.Vector3;
 import com.company.models.Line3D;
+import com.company.models.Plane;
+import com.company.screen.ScreenPoint;
 
 /**
  * Описывает трёхмерную со всеми объектами на ней
@@ -93,5 +97,35 @@ public class Scene {
         drawer.clear(backgroundColor);
         /*Рисуем все линии*/
         drawer.draw(lines);
+    }
+
+    public void drawScene(ICamera cam, Plane plane, Vector3 light, Shadow shadowDrawer) {
+        List<PolyLine3D> lines = new LinkedList<>();
+        LinkedList<Collection<? extends IModel>> allModels = new LinkedList<>();
+        allModels.add(models);
+        /*перебираем все полилинии во всех моделях*/
+        for (Collection<? extends IModel> mc : allModels)
+            for (IModel m : mc) {
+                for (PolyLine3D pl : shadowDrawer.shadows(m, plane, light)) {
+                    /*Все точки конвертируем с помощью камеры*/
+                    List<Vector3> points = new LinkedList<>();
+                    for (Vector3 v : pl.getPoints()) {
+                        points.add(cam.w2s(v));
+                    }
+                    /*Создаём на их сонове новые полилинии, но в том виде, в котором их видит камера*/
+                    lines.add(new PolyLine3D(points, pl.isClosed()));
+                }
+            }
+
+        /*Рисуем все линии*/
+        shadowDrawer.draw(lines);
+    }
+
+    public void drawSceneLight(Shadow sDrawer, LinkedList<ScreenPoint> point) {
+        sDrawer.drawLightSource(point);
+    }
+
+    public void drawPlane(SimpleEdgeDrawer simpleEdgeDrawer, Plane plane) {
+        simpleEdgeDrawer.planeDraw(plane);
     }
 }

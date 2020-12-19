@@ -4,6 +4,8 @@
  */
 package com.company.math;
 
+import static java.lang.Math.sqrt;
+
 /**
  * Класс, хранящий трёхмерный вектор / точку в трёхмерном пространстве.
  * @author Alexey
@@ -63,7 +65,13 @@ public class Vector3 {
         float lenSqr = values[0] * values[0] + values[1] * values[1] + values[2] * values[2];
         if (lenSqr < EPSILON)
             return 0;
-        return (float)Math.sqrt(lenSqr);
+        return (float) sqrt(lenSqr);
     }
-    
+
+    public float distanceFromPoint(Vector3 point) {
+        return (float) sqrt((getX() - point.getX()) * (getX() - point.getX()) +
+                (getY() - point.getY()) * (getY() - point.getY()) +
+                (getZ() - point.getZ()) * (getZ() - point.getZ()));
+    }
+
 }

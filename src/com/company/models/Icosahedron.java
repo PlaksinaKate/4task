@@ -7,12 +7,13 @@ import com.company.third.PolyLine3D;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 
 public class Icosahedron implements IModel {
     @Override
     public List<PolyLine3D> getLines() throws IOException {
-        ArrayList<PolyLine3D> lines = new ArrayList<>();
+        LinkedList<PolyLine3D> lines = new LinkedList<>();
         Vector3[] vector3s = Vertex.getIcosahedron();
         for (int i = 2; i < vector3s.length; i += 3) {
             lines.add(new PolyLine3D(Arrays.asList(
