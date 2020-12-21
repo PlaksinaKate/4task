@@ -31,7 +31,7 @@ public class Matrix3 {
         float determinant = getDeterminant();
 
         if (abs(determinant) < EPSILON) {
-            throw new Matrix3Exceptions("Детерминант матрицы равен 0.");
+            throw new Matrix3Exceptions("Детерминант матрицы равен 0, поэтому нельзя найти единственное решение");
         }
 
         Matrix3 xMatrix = new Matrix3(new float[][]{{knownPart.getX(), getAt(0, 1), getAt(0, 2)},
@@ -45,6 +45,7 @@ public class Matrix3 {
         Matrix3 zMatrix = new Matrix3(new float[][]{{getAt(0, 0), getAt(0, 1), knownPart.getX()},
                 {getAt(1, 0), getAt(1, 1), knownPart.getY()},
                 {getAt(2, 0), getAt(2, 1), knownPart.getZ()}});
+
         return new Vector3(xMatrix.getDeterminant() / determinant,
                 yMatrix.getDeterminant() / determinant, zMatrix.getDeterminant() / determinant);
 

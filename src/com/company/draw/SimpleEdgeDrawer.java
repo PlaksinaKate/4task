@@ -27,18 +27,6 @@ public class SimpleEdgeDrawer extends ScreenGraphicsDrawer {
         super(sc, g);
     }
 
-    public void planeDraw(Plane plane) {
-        if (plane.getD() != 0.0) {
-            plane.setA(plane.getD() / plane.getA());
-            plane.setB(plane.getB() / plane.getD());
-            plane.setC(plane.getC() / plane.getD());
-        }
-        int planeA = Math.round(plane.getA());
-        int planeB = Math.round(plane.getB());
-        // int planeC = Math.round(plane.getC());
-        getGraphics().setColor(Color.WHITE);
-        getGraphics().fillPolygon(new int[]{planeA, 0, 0}, new int[]{0, planeB, 0}, 3);
-    }
 
     /**
      * Рисует одну полилинию на графиксе.

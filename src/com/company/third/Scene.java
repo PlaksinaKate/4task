@@ -120,12 +120,4 @@ public class Scene {
         /*Рисуем все линии*/
         shadowDrawer.draw(lines);
     }
-
-    public void drawSceneLight(Shadow sDrawer, LinkedList<ScreenPoint> point) {
-        sDrawer.drawLightSource(point);
-    }
-
-    public void drawPlane(SimpleEdgeDrawer simpleEdgeDrawer, Plane plane) {
-        simpleEdgeDrawer.planeDraw(plane);
-    }
 }

@@ -69,8 +69,7 @@ public class Vector3 {
     }
 
     public float distanceFromPoint(Vector3 point) {
-        return (float) sqrt((getX() - point.getX()) * (getX() - point.getX()) +
-                (getY() - point.getY()) * (getY() - point.getY()) +
+        return (float) sqrt((getX() - point.getX()) * (getX() - point.getX()) + (getY() - point.getY()) * (getY() - point.getY()) +
                 (getZ() - point.getZ()) * (getZ() - point.getZ()));
     }
 

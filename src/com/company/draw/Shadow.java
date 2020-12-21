@@ -19,7 +19,6 @@ import java.util.LinkedList;
 import static java.lang.Math.abs;
 
 public class Shadow extends ScreenGraphicsDrawer {
-    private static final float EPSILON = 1e-10f;
 
     /**
      * Создаёт экземпляр рисвальщика
@@ -31,17 +30,7 @@ public class Shadow extends ScreenGraphicsDrawer {
         super(sc, gr);
     }
 
-
-    public void drawLightSource(LinkedList<ScreenPoint> point) {
-        getGraphics().setColor(Color.BLUE);
-        getGraphics().fillOval(point.get(0).getI(), point.get(0).getJ(), 100, 100);
-    }
-
     public LinkedList<PolyLine3D> shadows(IModel model, Plane plane, Vector3 lightSource) {
-        if (abs(plane.getA() * lightSource.getX() + plane.getB() * lightSource.getY() +
-                plane.getC() * lightSource.getZ() + plane.getD()) <= EPSILON) {
-            return new LinkedList<>();
-        }
         LinkedList<PolyLine3D> lines = null;
         try {
             lines = (LinkedList<PolyLine3D>) model.getLines();

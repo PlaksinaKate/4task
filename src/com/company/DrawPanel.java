@@ -17,10 +17,13 @@ import com.company.draw.Shadow;
 import com.company.draw.SimpleEdgeDrawer;
 import com.company.math.Vector3;
 import com.company.models.*;
+import com.company.models.Point;
 import com.company.screen.ScreenConverter;
 import com.company.screen.ScreenPoint;
 import com.company.third.Camera;
 import com.company.third.Scene;
+
+import static java.lang.Math.sqrt;
 
 /**
  * @author Alexey
@@ -45,16 +48,15 @@ public class DrawPanel extends JPanel
         addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                if (e.getButton() == MouseEvent.BUTTON3 && e.getClickCount() == 2) {
+                if (e.getButton() == MouseEvent.BUTTON1 && e.getClickCount() == 2) {
                     ScreenPoint screenPoint = new ScreenPoint(e.getX(), e.getY());
+                    Vector3 vector3 = sc.s2r(screenPoint);
                     BufferedImage bi = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_INT_RGB);
                     Graphics2D graphics = (Graphics2D) bi.getGraphics();
-                    Shadow shadowDrawer = new Shadow(sc, graphics);
                     if (!lightSource.isEmpty()) {
                         lightSource.remove(0);
                     }
                     lightSource.add(screenPoint);
-                    scene.drawSceneLight(shadowDrawer, lightSource);
                     shouldRepaint();
                 }
             }
@@ -84,40 +86,34 @@ public class DrawPanel extends JPanel
     }
 
     public void setTetrahedron() {
-        if (!scene.getModelsList().isEmpty())
-            scene.getModelsList().remove(0);
-        scene.getModelsList().add(new Tetrahedron());
+        scene.getModelsList().remove(1);
+        scene.getModelsList().add(new Tetrahedron(new Vector3(0, 1, 0), (float) sqrt(1.5)));
+        repaint();
     }
 
     public void setParallelepiped() {
-        if (!scene.getModelsList().isEmpty())
-            scene.getModelsList().remove(0);
-        scene.getModelsList().add(new Parallelepiped(
-                new Vector3(-0.4f, -0.4f, -0.4f),
-                new Vector3(0.4f, 0.4f, 0.4f)
-        ));
-        shouldRepaint();
+        scene.getModelsList().remove(1);
+        scene.getModelsList().add(new Parallelepiped(new Vector3(-0.4f, 0.4f, -0.4f),
+                new Vector3(0.4f, -0.4f, 0.4f)));
+        repaint();
     }
 
     public void setOctahedron() {
-        if (!scene.getModelsList().isEmpty())
-            scene.getModelsList().remove(0);
-        scene.getModelsList().add(new Octahedron());
-        shouldRepaint();
+        scene.getModelsList().remove(1);
+        scene.getModelsList().add(new Octahedron(new Vector3(0, 0, 0), 0.8f));
+        repaint();
     }
 
     public void setIcosahedron() {
-        if (!scene.getModelsList().isEmpty())
-            scene.getModelsList().remove(0);
-        scene.getModelsList().add(new Icosahedron());
-        shouldRepaint();
+        scene.getModelsList().remove(1);
+        scene.getModelsList().add(new Icosahedron(new Vector3(0, 0, 0), 0.4f));
+        repaint();
     }
 
     public void setDodecahedron() {
-        if (!scene.getModelsList().isEmpty())
-            scene.getModelsList().remove(0);
-        scene.getModelsList().add(new Dodecahedron());
-        shouldRepaint();
+        scene.getModelsList().remove(1);
+        scene.getModelsList().add(new Dodecahedron(new Vector3(0, 0, 0), 0.4f));
+        repaint();
     }
 
     public void setPlane(Plane plane) {
@@ -125,17 +121,14 @@ public class DrawPanel extends JPanel
         shouldRepaint();
     }
 
+
     @Override
     public void paint(Graphics g) {
-        System.out.println(12);
         sc.setScreenSize(getWidth(), getHeight());
         BufferedImage bi = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_INT_RGB);
         Graphics2D graphics = (Graphics2D) bi.getGraphics();
         IDrawer dr = new SimpleEdgeDrawer(sc, graphics);
         Shadow shadowDrawer = new Shadow(sc, graphics);
-        SimpleEdgeDrawer simpleEdgeDrawer = new SimpleEdgeDrawer(sc, graphics);
-        scene.drawPlane(simpleEdgeDrawer, plane);
-
         try {
             scene.drawScene(dr, cam);
         } catch (IOException e) {
@@ -154,6 +147,4 @@ public class DrawPanel extends JPanel
     public void shouldRepaint() {
         repaint();
     }
-
-
 }

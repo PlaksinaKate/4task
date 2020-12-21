@@ -1,7 +1,6 @@
 package com.company;
 
 import com.company.models.Plane;
-import com.company.models.Vertex;
 import com.company.utils.SwingUtils;
 
 import javax.swing.*;
