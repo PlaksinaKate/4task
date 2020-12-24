@@ -16,7 +16,6 @@ public class MainWindow extends JFrame {
     private JPanel contentPane;
     private DrawPanel dp;
     private JPanel panel2;
-    private JButton openButton;
     private JButton tetrahedronButton;
     private JButton cubeButton;
     private JButton octahedronButton;
@@ -44,66 +43,32 @@ public class MainWindow extends JFrame {
         spinnerD.setModel(new SpinnerNumberModel(10f, -100f, 300, 0.1f));
 
 
-        try {
-            Vertex.reader("Координаты точек платоновых тел.txt");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        openButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                try {
-                    if (fileChooserOpen.showOpenDialog(panel2) == JFileChooser.APPROVE_OPTION) {
-                        Vertex.reader(fileChooserOpen.getSelectedFile().getPath());
-                    }
-                } catch (Exception e) {
-                    SwingUtils.showErrorMessageBox(e);
-                }
-            }
-        });
-
         tetrahedronButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                try {
-                    dp.setTetrahedron();
-                } catch (Exception e) {
-                    SwingUtils.showErrorMessageBox(e);
-                }
+                dp.setTetrahedron();
             }
         });
 
         cubeButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                try {
-                    dp.setParallelepiped();
-                } catch (Exception e) {
-                    SwingUtils.showErrorMessageBox(e);
-                }
+                dp.setParallelepiped();
             }
         });
 
         octahedronButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                try {
-                    dp.setOctahedron();
-                } catch (Exception e) {
-                    SwingUtils.showErrorMessageBox(e);
-                }
+                dp.setOctahedron();
+
             }
         });
 
         icosahedronButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                try {
-                    dp.setIcosahedron();
-                } catch (Exception e) {
-                    SwingUtils.showErrorMessageBox(e);
-                }
+                dp.setIcosahedron();
             }
         });
 
@@ -111,11 +76,7 @@ public class MainWindow extends JFrame {
         dodecahedronButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                try {
-                    dp.setDodecahedron();
-                } catch (Exception e) {
-                    SwingUtils.showErrorMessageBox(e);
-                }
+                dp.setDodecahedron();
             }
         });
 

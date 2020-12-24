@@ -86,32 +86,37 @@ public class DrawPanel extends JPanel
     }
 
     public void setTetrahedron() {
-        scene.getModelsList().remove(1);
+        if (!scene.getModelsList().isEmpty())
+            scene.getModelsList().remove(0);
         scene.getModelsList().add(new Tetrahedron(new Vector3(0, 1, 0), (float) sqrt(1.5)));
         repaint();
     }
 
     public void setParallelepiped() {
-        scene.getModelsList().remove(1);
+        if (!scene.getModelsList().isEmpty())
+            scene.getModelsList().remove(0);
         scene.getModelsList().add(new Parallelepiped(new Vector3(-0.4f, 0.4f, -0.4f),
                 new Vector3(0.4f, -0.4f, 0.4f)));
         repaint();
     }
 
     public void setOctahedron() {
-        scene.getModelsList().remove(1);
+        if (!scene.getModelsList().isEmpty())
+            scene.getModelsList().remove(0);
         scene.getModelsList().add(new Octahedron(new Vector3(0, 0, 0), 0.8f));
         repaint();
     }
 
     public void setIcosahedron() {
-        scene.getModelsList().remove(1);
+        if (!scene.getModelsList().isEmpty())
+            scene.getModelsList().remove(0);
         scene.getModelsList().add(new Icosahedron(new Vector3(0, 0, 0), 0.4f));
         repaint();
     }
 
     public void setDodecahedron() {
-        scene.getModelsList().remove(1);
+        if (!scene.getModelsList().isEmpty())
+            scene.getModelsList().remove(0);
         scene.getModelsList().add(new Dodecahedron(new Vector3(0, 0, 0), 0.4f));
         repaint();
     }
